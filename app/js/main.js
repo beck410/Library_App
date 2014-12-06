@@ -6,7 +6,7 @@
       var vm = this;
       vm.newBook = {};
       vm.category = {};
-      
+
       vm.books = [
         {
           category: 'Fiction',
@@ -49,7 +49,7 @@
         one: 1,
         two: 2,
         three: 3,
-        four: 4, 
+        four: 4,
         five: 5
       };
 
@@ -61,7 +61,7 @@
     vm.addNewBook = function(){
       console.log("called")
       vm.books.push(vm.newBook);
-      vm.newBook = {};         
+      vm.newBook = {};
     };
   });
 })();
