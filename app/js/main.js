@@ -12,31 +12,36 @@
           category: 'Fiction',
           bookTitle: 'War and Peace',
           author: 'Leo Tolstoy',
-          rating: 4
+          rating: 4,
+          read: true
         },
         {
           category: 'Non-Fiction',
           bookTitle: 'The Big Bang',
           author: 'Simon Singh',
-          rating: 3
+          rating: 3,
+          read: true
         },
         {
           category: 'Fiction',
           bookTitle: 'Foundation',
           author: 'Issac Asimov',
-          rating: 4
+          rating: 4,
+          read: false
         },
         {
           category: 'Non-Fiction',
           bookTitle: 'The White Mouse',
           author: 'Nancy Wake',
-          rating: 5
+          rating: 5,
+          read: false
         },
         {
           category: 'Fiction',
           bookTitle: 'The Martian Chronicles',
           author: 'Ray Bradbury',
-          rating: 2
+          rating: 2,
+          read: true
         }
       ];
 
