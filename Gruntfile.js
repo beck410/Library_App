@@ -127,10 +127,12 @@
           destPrefix: 'app/dist/'
           },
         files: {
-          'js/jquery/jquery.min.js': 'jquery/dist/jquery.min.js',
-          'js/lodash/lodash.min.js': 'lodash/dist/lodash.min.js',
-          'js/jqueryui/jquery-ui.min.js': 'jqueryui/jquery-ui.min.js',
-          'styles/normalize.css' : 'normalize.css/normalize.css'
+          'js/jquery/jquery.min.js': 'jquery/dist/jquery.js',
+          'js/angular/angular.js': 'angular/angular.js',
+          'styles/normalize.css' : 'normalize.css/normalize.css',
+          'js/bootstrap.js' : 'bootstrap/dist/js/bootstrap.js',
+          'styles/bootstrap.css' : 'bootstrap/dist/css/bootstrap.css',
+          'styles/bootstrap.css.map' : 'bootstrap/dist/css/bootstrap.css.map'
         }
       }
     },
@@ -140,21 +142,7 @@
         src: 'tests/**/*.html'
       }
     },
-
-simplemocha: {
-    options: {
-      globals: ['should'],
-      timeout: 3000,
-      ignoreLeaks: false,
-      grep: '*-test',
-      ui: 'bdd',
-      reporter: 'tap'
-    },
-    all: { src: 'test/**/*.js' }
-    }
-  })
-  
-  grunt.task.run('notify_hooks');
+    });
 
   grunt.registerTask('serve', ['connect:livereload','sass','watch']);
   grunt.registerTask('css', ['sass','cssmin','uncss']);
