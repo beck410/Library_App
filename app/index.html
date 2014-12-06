@@ -18,7 +18,7 @@
             {{text}}
           </option>
         </select>
-      <label>Title: </label><input type="text" ng-model="lib.newBook.title" required />
+      <label>Title: </label><input type="text" ng-model="lib.newBook.bookTitle" required />
       <label>author: </label><input type="text" placeholder="last name, first name" ng-model="lib.newBook.author" required />
       <select ng-model="lib.newBook.ratings">
         <option value={{rating}} ng-repeat="(rating,text) in lib.ratings">
