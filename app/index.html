@@ -19,12 +19,13 @@
           </option>
         </select>
       <label>Title: </label><input type="text" ng-model="lib.newBook.title" required />
-      <label>author: </label><input type="text" placeholder="last name, first name" ng-model="lib.newBook.author" required /> 
+      <label>author: </label><input type="text" placeholder="last name, first name" ng-model="lib.newBook.author" required />
       <select ng-model="lib.newBook.ratings">
         <option value={{rating}} ng-repeat="(rating,text) in lib.ratings">
             {{text}}
         </option>
       </select>
+      <label>Read: </label><input type="checkbox" value="read" ng-model="lib.newBook.read"/>
       <input type="submit" value="Add Book" ng-show="bookForm.$valid"/>
     </form>
     <table>
