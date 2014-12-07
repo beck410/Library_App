@@ -15,8 +15,16 @@
           console.log('book error: ' + err);
         });
 
+      function _defaultBook(){
+        return {
+          rating: 3,
+          read: false
+
+        };
+      }
+
       //public vars
-      vm.newBook = {};
+      vm.newBook = _defaultBook();
       vm.rating = {
         one: 1,
         two: 2,
@@ -34,7 +42,7 @@
         $http.post('https://bcd-library.firebaseio.com/books.json',vm.newBook)
         .success(function(data){
           vm.books[data.name] = vm.newBook;
-          vm.newBook = {};
+          vm.newBook = _defaultBook();
         })
         .error(function(err){
           console.log('add Book error:' + err);
