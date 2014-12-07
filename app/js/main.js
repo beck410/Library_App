@@ -2,49 +2,21 @@
   'use strict';
 
   angular.module('Library',[])
-    .controller('LibraryController',function(){
+    .controller('LibraryController',function($http){
+      //private vars
       var vm = this;
+
+      //private functions
+      $http.get('https://bcd-library.firebaseio.com/books.json')
+        .success(function(data){
+          vm.books = data;
+        })
+        .error(function(err){
+          console.log('book error: ' + err);
+        });
+
+      //public vars
       vm.newBook = {};
-      vm.category = {};
-
-      vm.books = [
-        {
-          category: 'Fiction',
-          bookTitle: 'War and Peace',
-          author: 'Leo Tolstoy',
-          rating: 4,
-          read: true
-        },
-        {
-          category: 'Non-Fiction',
-          bookTitle: 'The Big Bang',
-          author: 'Simon Singh',
-          rating: 3,
-          read: true
-        },
-        {
-          category: 'Fiction',
-          bookTitle: 'Foundation',
-          author: 'Issac Asimov',
-          rating: 4,
-          read: false
-        },
-        {
-          category: 'Non-Fiction',
-          bookTitle: 'The White Mouse',
-          author: 'Nancy Wake',
-          rating: 5,
-          read: false
-        },
-        {
-          category: 'Fiction',
-          bookTitle: 'The Martian Chronicles',
-          author: 'Ray Bradbury',
-          rating: 2,
-          read: true
-        }
-      ];
-
       vm.rating = {
         one: 1,
         two: 2,
@@ -52,17 +24,22 @@
         four: 4,
         five: 5
       };
-
       vm.category = {
         fiction: 'Fiction',
         nonFiction: 'Non-Fiction'
       };
 
-    vm.addNewBook = function(){
-      console.log("called")
-      vm.books.push(vm.newBook);
-      vm.newBook = {};
-    };
-  });
+      //public functions
+      vm.addNewBook = function(){
+        $http.post('https://bcd-library.firebaseio.com/books.json',vm.newBook)
+        .success(function(data){
+          vm.books[data.name] = vm.newBook;
+          vm.newBook = {};
+        })
+        .error(function(err){
+          console.log('add Book error:' + err);
+        });
+      };
+    });
 })();
 
