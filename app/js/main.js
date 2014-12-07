@@ -40,6 +40,17 @@
           console.log('add Book error:' + err);
         });
       };
+
+      vm.removeBook = function(bookId){
+        var url = 'https://bcd-library.firebaseio.com/books/' + bookId + '.json';
+        $http.delete(url)
+          .success(function(){
+            delete vm.books[bookId];
+          })
+          .error(function(err){
+            console.log('book delete error:' + err);
+          })
+      }
     });
 })();
 
