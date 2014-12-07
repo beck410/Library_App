@@ -59,6 +59,18 @@
             console.log('book delete error:' + err);
           })
       }
+
+      vm.updateRead = function(bookId, readValue){
+        console.log(readValue);
+        var url = 'https://bcd-library.firebaseio.com/books/' + bookId +'/read.json';
+        $http.put(url, readValue)
+          .success(function(data){
+            console.log(readValue);
+          })
+          .error(function(err){
+            console.log('update read error: ' + err);
+          });
+      };
     });
 })();
 
