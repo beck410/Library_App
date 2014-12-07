@@ -17,7 +17,7 @@
           <div class="form-control">
             <label>Category: </label>
             <select ng-model="lib.newBook.category" required>
-              <option value={{category}} ng-repeat="(category,text) in lib.category">
+              <option value={{text}} ng-repeat="(category,text) in lib.category">
               {{text}}
               </option>
             </select>
@@ -53,7 +53,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="row" ng-repeat="(bookId, book) in lib.books">
+          <tr class="row" ng-repeat="(bookId, book) in lib.books | orderBy: 'category' ">
             <td class="col-md-2">{{book.category}}</td>
             <td class="col-md-3">{{book.bookTitle}}</td>
             <td class="col-md-3">{{book.author}}</td>

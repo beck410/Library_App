@@ -64,7 +64,7 @@
         console.log(readValue);
         var url = 'https://bcd-library.firebaseio.com/books/' + bookId +'/read.json';
         $http.put(url, readValue)
-          .success(function(data){
+          .success(function(readValue){
             console.log(readValue);
           })
           .error(function(err){
