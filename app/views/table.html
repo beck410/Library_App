@@ -1,0 +1,22 @@
+<table>
+  <thead>
+    <tr class="row table-headers">
+      <th class="col-md-3">Category</th>
+      <th class="col-md-3">Title</th>
+      <th class="col-md-3">Author</th>
+      <th class="col-md-2">Ratings</th>
+      <th class="col-md-2">Read</th>
+      <th class="col-md-2">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="row table-body" ng-repeat="(bookId, book) in lib.books">
+      <td class="col-md-2">{{book.category}}</td>
+      <td class="col-md-3">{{book.bookTitle}}</td>
+      <td class="col-md-3">{{book.author}}</td>
+      <td class="col-md-2">{{book.rating}} stars</td>
+      <td class="col-md-2"><input type="checkbox" ng-model="book.read" ng-click="lib.updateRead(bookId,book.read,book)"</td>
+      <td class="col-md-2"><button ng-click="lib.removeBook(bookId)">Delete</button></td>
+    </tr>
+  </tbody>
+</table>

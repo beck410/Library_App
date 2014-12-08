@@ -1,0 +1,29 @@
+<form role="form" class="form-inline" name="bookForm" ng-submit="bookForm.$valid && lib.addNewBook()" novalidate>
+  <div class="form-control">
+    <label>Category: </label>
+    <select ng-model="lib.newBook.category" required>
+      <option value={{text}} ng-repeat="(category,text) in lib.category">
+        {{text}}
+      </option>
+    </select>
+  </div>
+  <div class="form-group" class="form-control">
+    <label class="sr-only" for="bookTitle">Title: </label><input type="text" class="form-control" id="bookTitle" placeholder="Title" ng-model="lib.newBook.bookTitle" required />
+  </div>
+  <div class="form-group">
+    <label class="sr-only" for="bookAuthor">author: </label><input type="text" class="form-control" id="bookAuthor" placeholder="last name, first name" ng-model="lib.newBook.author" required />
+  </div>
+  <div class="form-control">
+    <select ng-model="lib.newBook.rating">
+      <option value={{text}} ng-repeat="(rating,text) in lib.rating">
+        {{text}}
+      </option>
+    </select>
+  </div>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" value="read" ng-model="lib.newBook.read"/> Read
+    </label>
+    <input type="submit" value="Add Book" ng-show="bookForm.$valid"/>
+  </div>
+</form>
