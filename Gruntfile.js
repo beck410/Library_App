@@ -4,7 +4,7 @@
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    
+
     cssmin: {
       my_target: {
         files: [{
@@ -12,7 +12,7 @@
           cwd: 'app/styles',
           src: ['*.css','!*.min.css'],
           dest: 'app/dist/styles/',
-          ext: '.min.css' 
+          ext: '.min.css'
         }]
       }
 	},
@@ -23,11 +23,11 @@
       },
       my_target: {
         files: {
-          'app/dist/js/<%= pkg.name %>.min.js': ['app/dist/js/<%= pkg.name %>.js'], 
+          'app/dist/js/<%= pkg.name %>.min.js': ['app/dist/js/<%= pkg.name %>.js'],
         }
       }
     },
-    
+
     concat: {
       options: {
         seperator: ';',
@@ -48,7 +48,7 @@
       dist: {
         files: {
           'app/styles/<%= pkg.name %>.css': 'app/sass/main.scss'
-        }  
+        }
       }
     },
 
@@ -56,7 +56,7 @@
       livereload: {
         options: {
           livereload: '<%= connect.options.livereload %>'
-        }, 
+        },
         files: ['app/*.html','app/sass/*.scss', 'app/styles/*.css','app/js/*.js']
       },
       sass: {
