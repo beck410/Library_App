@@ -9,7 +9,11 @@
       //private functions
       $http.get('https://bcd-library.firebaseio.com/books.json')
         .success(function(data){
-          vm.books = data;
+          if(data){
+            vm.books = data;
+          } else {
+            vm.books = {};
+          }
         })
         .error(function(err){
           console.log('book error: ' + err);
@@ -19,7 +23,6 @@
         return {
           rating: 3,
           read: false
-
         };
       }
 
@@ -61,10 +64,9 @@
       }
 
       vm.updateRead = function(bookId, readValue,book){
-        var readValueObject = book;
-        readValueObject.read = readValue;
+        book.read = readValue;
         var url = 'https://bcd-library.firebaseio.com/books/' + bookId + '.json';
-        $http.put(url, readValueObject)
+        $http.put(url, book)
           .success(function(readValue){
           })
           .error(function(err){
