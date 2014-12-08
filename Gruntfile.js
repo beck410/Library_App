@@ -129,6 +129,8 @@
         files: {
           'js/jquery/jquery.min.js': 'jquery/dist/jquery.js',
           'js/angular/angular.js': 'angular/angular.js',
+          'js/angular-route/angular-route.min.js': 'angular-route/angular-route.min.js',
+          'js/angular-route/angular-route.min.js.map': 'angular-route/angular-route.min.js.map',
           'styles/normalize.css' : 'normalize.css/normalize.css',
           'js/bootstrap.js' : 'bootstrap/dist/js/bootstrap.js',
           'styles/bootstrap.css' : 'bootstrap/dist/css/bootstrap.css',
