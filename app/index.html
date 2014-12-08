@@ -11,58 +11,64 @@
 <body>
 <div class="container" ng-controller="LibraryController as lib">
   <div class="row header">
-    <h1>Beck's Library</h1>
-  </div class="form-group">
-  <form role="form" class="form-inline" name="bookForm" ng-submit="bookForm.$valid && lib.addNewBook()" novalidate>
-    <div class="form-control">
-      <label>Category: </label>
-      <select ng-model="lib.newBook.category" required>
-        <option value={{text}} ng-repeat="(category,text) in lib.category">
-        {{text}}
-        </option>
-      </select>
+    <div class="col-md-2 header-side">
     </div>
-    <div class="form-group" class="form-control">
-      <label class="sr-only" for="bookTitle">Title: </label><input type="text" class="form-control" id="bookTitle" placeholder="Title" ng-model="lib.newBook.bookTitle" required />
+    <div class="col-md-10 header-main">  
+      <h1>Beck's Library</h1>
     </div>
-    <div class="form-group">
-      <label class="sr-only" for="bookAuthor">author: </label><input type="text" class="form-control" id="bookAuthor" placeholder="last name, first name" ng-model="lib.newBook.author" required />
-    </div>
-    <div class="form-control">
-      <select ng-model="lib.newBook.rating">
-        <option value={{text}} ng-repeat="(rating,text) in lib.rating">
-        {{text}}
-        </option>
-      </select>
-    </div>
-    <div class="checkbox">
-      <label>
-        <input type="checkbox" value="read" ng-model="lib.newBook.read"/> Read
-      </label>
-      <input type="submit" value="Add Book" ng-show="bookForm.$valid"/>
-    </div>
-  </form>
-  <table>
-    <thead>
-      <tr class="row">
-        <th class="col-md-2" ng-click="predicate= 'category'; revers=false">Category</th>
-        <th class="col-md-3">Title</th>
-        <th class="col-md-3">Author</th>
-        <th class="col-md-2">Ratings</th>
-        <th class="col-md-2">Read</th>
+</div>
+<div class="page-main">
+    <form role="form" class="form-inline" name="bookForm" ng-submit="bookForm.$valid && lib.addNewBook()" novalidate>
+      <div class="form-control">
+        <label>Category: </label>
+        <select ng-model="lib.newBook.category" required>
+          <option value={{text}} ng-repeat="(category,text) in lib.category">
+          {{text}}
+          </option>
+        </select>
+      </div>
+      <div class="form-group" class="form-control">
+        <label class="sr-only" for="bookTitle">Title: </label><input type="text" class="form-control" id="bookTitle" placeholder="Title" ng-model="lib.newBook.bookTitle" required />
+      </div>
+      <div class="form-group">
+        <label class="sr-only" for="bookAuthor">author: </label><input type="text" class="form-control" id="bookAuthor" placeholder="last name, first name" ng-model="lib.newBook.author" required />
+      </div>
+      <div class="form-control">
+        <select ng-model="lib.newBook.rating">
+          <option value={{text}} ng-repeat="(rating,text) in lib.rating">
+          {{text}}
+          </option>
+        </select>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" value="read" ng-model="lib.newBook.read"/> Read
+        </label>
+        <input type="submit" value="Add Book" ng-show="bookForm.$valid"/>
+      </div>
+    </form>
+    <table>
+      <thead>
+        <tr class="row table-headers">
+          <th class="col-md-3">Category</th>
+          <th class="col-md-3">Title</th>
+          <th class="col-md-3">Author</th>
+          <th class="col-md-2">Ratings</th>
+          <th class="col-md-2">Read</th>
+          <th class="col-md-2">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr class="row table-body" ng-repeat="(bookId, book) in lib.books">
+        <td class="col-md-2">{{book.category}}</td>
+        <td class="col-md-3">{{book.bookTitle}}</td>
+        <td class="col-md-3">{{book.author}}</td>
+        <td class="col-md-2">{{book.rating}} stars</td>
+        <td class="col-md-2"><input type="checkbox" ng-model="book.read" ng-click="lib.updateRead(bookId,book.read)"</td>
+        <td class="col-md-2"><button ng-click="lib.removeBook(bookId)">Delete</button></td>
       </tr>
-    </thead>
-    <tbody>
-    <tr class="row" ng-repeat="(bookId, book) in lib.books">
-      <td class="col-md-2">{{book.category}}</td>
-      <td class="col-md-3">{{book.bookTitle}}</td>
-      <td class="col-md-3">{{book.author}}</td>
-      <td class="col-md-2">{{book.rating}}</td>
-      <td class="col-md-2"><input type="checkbox" ng-model="book.read" ng-click="lib.updateRead(bookId,book.read)"</td>
-      <td class="col-md-2"><button ng-click="lib.removeBook(bookId)">Delete</button></td>
-    </tr>
-    </tbody>
-  </table>
+      </tbody>
+    </table>
 </div>
 <script src="dist/js/jquery.js" type="text/javascript"></script>
 <script src="dist/js/angular/angular.js" type="text/javascript"></script>

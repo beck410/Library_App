@@ -1,2 +1,44 @@
 /* global variables */
 /* imports */
+table {
+  margin-bottom: 20px; }
+
+thead {
+  font-size: 1.5em; }
+
+.table-headers {
+  background: lightgrey;
+  border-radius: 10px;
+  padding: 10px 0; }
+
+td {
+  padding-top: 20px; }
+
+.header {
+  height: 200px; }
+
+.header-side {
+  background: url("../images/books.jpg");
+  background-size: 200px auto;
+  background-repeat: repeat-y;
+  height: 200px; }
+
+.header-main {
+  background: white;
+  height: 200px;
+  font-size: 3em;
+  color: grey; }
+
+.container {
+  border-right: 3px solid grey;
+  border-left: 3px solid grey;
+  border-bottom: 3px solid grey; }
+
+.page-main {
+  margin-top: 20px; }
+
+form {
+  margin-bottom: 20px;
+  border: 3px solid grey;
+  padding: 20px;
+  border-radius: 10px; }
