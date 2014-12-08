@@ -60,12 +60,12 @@
           })
       }
 
-      vm.updateRead = function(bookId, readValue){
-        console.log(readValue);
-        var url = 'https://bcd-library.firebaseio.com/books/' + bookId +'/read.json';
-        $http.put(url, readValue)
+      vm.updateRead = function(bookId, readValue,book){
+        var readValueObject = book;
+        readValueObject.read = readValue;
+        var url = 'https://bcd-library.firebaseio.com/books/' + bookId + '.json';
+        $http.put(url, readValueObject)
           .success(function(readValue){
-            console.log(readValue);
           })
           .error(function(err){
             console.log('update read error: ' + err);
