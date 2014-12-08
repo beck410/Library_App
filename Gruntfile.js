@@ -57,7 +57,7 @@
         options: {
           livereload: '<%= connect.options.livereload %>'
         },
-        files: ['app/*.html','app/sass/*.scss', 'app/styles/*.css','app/js/*.js']
+        files: ['app/*.html','app/views/*.html','app/sass/*.scss', 'app/styles/*.css','app/js/*.js']
       },
       sass: {
         files: ['app/sass','app/sass/*.scss', 'app/dist/styles/*.css'],
