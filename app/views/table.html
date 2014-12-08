@@ -6,7 +6,7 @@
       <th class="col-md-3">Author</th>
       <th class="col-md-2">Ratings</th>
       <th class="col-md-2">Read</th>
-      <th class="col-md-2">Delete</th>
+      <th class="col-md-2">Options</th>
     </tr>
   </thead>
   <tbody>
@@ -16,7 +16,10 @@
       <td class="col-md-3">{{book.author}}</td>
       <td class="col-md-2">{{book.rating}} stars</td>
       <td class="col-md-2"><input type="checkbox" ng-model="book.read" ng-click="lib.updateRead(bookId,book.read,book)"</td>
-      <td class="col-md-2"><button ng-click="lib.removeBook(bookId)">Delete</button></td>
+      <td class="col-md-2">
+        <button type="button" class="btn"ng-click="lib.removeBook(bookId)">Delete</button>
+        <button type="button" class="btn-info">More info...</button>
+      </td>
     </tr>
   </tbody>
 </table>
