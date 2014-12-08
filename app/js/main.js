@@ -71,6 +71,10 @@
             console.log('update read error: ' + err);
           });
       };
+
+      vm.addStars = function(rating){
+        return rating;
+      }
     });
 })();
 
