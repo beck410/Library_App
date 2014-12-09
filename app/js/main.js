@@ -14,7 +14,26 @@
         controller: 'LibraryController',
         controllerAs: 'lib'
       })
+      .when('/:bookId',{
+        templateUrl: 'views/details.html',
+        controller: 'detailsController',
+        controllerAs: 'details'
+      })
       .otherwise({redirectTo: '/'});
+    })
+    .controller('detailsController',function($http, $routeParams){
+      var vm = this;
+      var bookId = $routeParams.bookId;
+      var url ='https://bcd-library.firebaseio.com/books/' + bookId +'.json';
+      console.log(url);
+      $http.get(url)
+        .success(function(data){
+          console.log(data);
+          vm.book = data;
+        })
+        .error(function(err){
+          console.log(err);
+        });
     })
     .controller('LibraryController',function($http){
       //private vars

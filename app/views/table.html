@@ -18,7 +18,7 @@
       <td class="col-md-2"><input type="checkbox" ng-model="book.read" ng-click="lib.updateRead(bookId,book.read,book)"</td>
       <td class="col-md-2">
         <button type="button" class="btn"ng-click="lib.removeBook(bookId)">Delete</button>
-        <button type="button" class="btn-info">More info...</button>
+        <a class="btn-link" href="/#/{{bookId}}">More info...</button>
       </td>
     </tr>
   </tbody>
