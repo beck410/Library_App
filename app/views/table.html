@@ -1,22 +1,20 @@
 <table>
   <thead>
     <tr class="row table-headers">
-      <th class="col-md-3">Category</th>
-      <th class="col-md-3">Title</th>
-      <th class="col-md-3">Author</th>
-      <th class="col-md-2">Ratings</th>
+      <th class="col-md-2">Category</th>
+      <th class="col-md-4">Title</th>
+      <th class="col-md-4">Author</th>
       <th class="col-md-2">Read</th>
-      <th class="col-md-2">Options</th>
+      <th class="col-md-3">Options</th>
     </tr>
   </thead>
   <tbody>
     <tr class="row table-body" ng-repeat="(bookId, book) in lib.books">
       <td class="col-md-2">{{book.category}}</td>
-      <td class="col-md-3">{{book.bookTitle}}</td>
-      <td class="col-md-3">{{book.author}}</td>
-      <td class="col-md-2">{{book.rating}} stars</td>
+      <td class="col-md-4">{{book.bookTitle}}</td>
+      <td class="col-md-4">{{book.author}}</td>
       <td class="col-md-2"><input type="checkbox" ng-model="book.read" ng-click="lib.updateRead(bookId,book.read,book)"</td>
-      <td class="col-md-2">
+      <td class="col-md-3">
         <button type="button" class="btn"ng-click="lib.removeBook(bookId)">Delete</button>
         <a class="btn-link" href="/#/{{bookId}}">More info...</button>
       </td>
