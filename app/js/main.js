@@ -28,7 +28,6 @@
       $http.get(url)
         .success(function(data){
           vm.book = data;
-
           vm.coverImageUrl = _getCoverImageUrl();
         })
         .error(function(err){
@@ -42,7 +41,7 @@
           return url;
         }
     })
-    .controller('LibraryController',function($http){
+    .controller('LibraryController',function($http,$location){
       //private vars
       var vm = this;
 
@@ -86,6 +85,7 @@
         .success(function(data){
           vm.books[data.name] = vm.newBook;
           vm.newBook = _defaultBook();
+          $location.path('/')
         })
         .error(function(err){
           console.log('add Book error:' + err);
