@@ -25,15 +25,22 @@
       var vm = this;
       var bookId = $routeParams.bookId;
       var url ='https://bcd-library.firebaseio.com/books/' + bookId +'.json';
-      console.log(url);
       $http.get(url)
         .success(function(data){
-          console.log(data);
           vm.book = data;
+
+          vm.coverImageUrl = _getCoverImageUrl();
         })
         .error(function(err){
           console.log(err);
         });
+
+        function _getCoverImageUrl(){
+          var isbn = vm.book.ISBN;
+          var url = 'http://covers.openlibrary.org/b/isbn/' + isbn + '-L.jpg';
+          console.log(url)
+          return url;
+        }
     })
     .controller('LibraryController',function($http){
       //private vars
