@@ -25,9 +25,10 @@ td {
 
 .header-main {
   background: white;
-  height: 200px;
-  font-size: 3em;
-  color: grey; }
+  height: 200px; }
+  .header-main h1 {
+    font-size: 72px;
+    color: grey; }
 
 .container {
   margin: 20px auto;
@@ -36,8 +37,8 @@ td {
 .page-main {
   margin-top: 20px; }
 
-@media screen and (max-width: 700px) {
-  .header-main {
+@media (max-width: 700px) {
+  .main-header h1 {
     font-size: 1.5em;
     padding-top: 50px; } }
 form {
