@@ -26,20 +26,31 @@
     })
     .otherwise({redirectTo: '/'});
   })
-  .controller('detailsController',function($http, $routeParams){
-    var vm = this;
-    var bookId = $routeParams.bookId;
-    var url ='https://bcd-library.firebaseio.com/books/' + bookId +'.json';
-    $http.get(url)
+  .factory('libFactory', function($http){
+
+    function listBookDetails(id,cb){
+      $http.get('https://bcd-library.firebaseio.com/books/' + id +'.json')
       .success(function(data){
-        vm.book = data;
-        vm.coverImageUrl = _getCoverImageUrl();
+        cb(data)
       })
       .error(function(err){
         console.log(err);
-      });
+      })
+    }
 
-    function _getCoverImageUrl(){
+    return {
+      listBookDetails: listBookDetails
+    }
+  })
+  .controller('detailsController',function($http, $routeParams, libFactory){
+    var vm = this;
+    var bookId = $routeParams.bookId;
+    libFactory.listBookDetails(bookId,function(data){
+      vm.book = data;
+      vm.coverImageUrl = _coverImageUrl();
+    })
+
+    function _coverImageUrl() {
       var isbn = vm.book.ISBN;
       var url = 'http://covers.openlibrary.org/b/isbn/' + isbn + '-L.jpg';
       return url;
@@ -49,12 +60,9 @@
     var vm = this;
     var id = $routeParams.bookId;
     var url = 'https://bcd-library.firebaseio.com/books/' + id + '.json';
-    console.log(url);
-    console.log($routeParams)
     $http.get(url)
       .success(function(data){
         vm.newBook = data;
-        console.log(data);
     })
     .error(function(err){
       console.log('edit book error: ' + err);
@@ -157,4 +165,3 @@
     };
   });
 })();
-
