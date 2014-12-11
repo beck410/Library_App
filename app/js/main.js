@@ -95,6 +95,13 @@
       nonFiction: 'Non-Fiction'
     };
 
+    var defaultBook = function(){
+      return {
+        rating: 3,
+        read: false
+      };
+    }
+
     return {
       getAllBooks: getAllBooks,
       getBook: getBook,
@@ -102,7 +109,8 @@
       createNewBook: createNewBook,
       deleteBook: deleteBook,
       rating: ratingOptions,
-      category: categoryOptions
+      category: categoryOptions,
+      defaultBook: defaultBook
     }
   })
   .controller('detailsController',function($http, $routeParams, libFactory){
@@ -152,7 +160,7 @@
     vm.addNewBook = function(){
       libFactory.createNewBook(vm.newBook, function(data){
         vm.books[data.name] = vm.newBook;
-        vm.newBook = _defaultBook();
+        libFactory.defaultBook();
         $location.path('/');
       })
     };
@@ -178,18 +186,11 @@
 
     vm.category = libFactory.category;
 
-    vm.newBook = _defaultBook();
-
     vm.addStars = function(rating){
       return rating;
     };
 
-    function _defaultBook(){
-      return {
-        rating: 3,
-        read: false
-      };
-    }
+
 
   });
 })();
