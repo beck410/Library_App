@@ -70,7 +70,7 @@
       return url;
     }
   })
-  .controller('editBookController',function($http, $routeParams, $location, libFactory){
+  .controller('editBookController',function($routeParams, libFactory){
     var vm = this;
     var id = $routeParams.bookId;
     var url = 'https://bcd-library.firebaseio.com/books/' + id + '.json';
