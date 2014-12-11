@@ -71,11 +71,24 @@
       });
     }
 
+    function deleteBook(bookId, cb){
+      var url = 'https://bcd-library.firebaseio.com/books/' + bookId + '.json';
+      $http.delete(url)
+      .success(function(){
+        cb();
+      })
+      .error(function(err){
+        console.log('delete book error: ' + err);
+      })
+    }
+
     return {
       getAllBooks: getAllBooks,
       getBook: getBook,
       editBook: editBook,
-      createNewBook: createNewBook
+      createNewBook: createNewBook,
+      deleteBook: deleteBook
+
     }
   })
   .controller('detailsController',function($http, $routeParams, libFactory){
@@ -130,6 +143,12 @@
       })
     };
 
+    vm.removeBook = function(bookId){
+      libFactory.deleteBook(bookId,function(){
+        delete vm.books[bookId];
+      })
+    }
+
     function _defaultBook(){
       return {
         rating: 3,
@@ -149,19 +168,6 @@
     vm.category = {
       fiction: 'Fiction',
       nonFiction: 'Non-Fiction'
-    };
-
-
-
-    vm.removeBook = function(bookId){
-      var url = 'https://bcd-library.firebaseio.com/books/' + bookId + '.json';
-      $http.delete(url)
-        .success(function(){
-          delete vm.books[bookId];
-        })
-      .error(function(err){
-        console.log('book delete error:' + err);
-      });
     };
 
     vm.updateRead = function(bookId, readValue,book){
