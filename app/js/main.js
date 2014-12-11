@@ -28,16 +28,6 @@
   })
   .factory('libFactory', function($http){
 
-    function listBookDetails(id,cb){
-      $http.get('https://bcd-library.firebaseio.com/books/' + id +'.json')
-      .success(function(data){
-        cb(data)
-      })
-      .error(function(err){
-        console.log(err);
-      })
-    }
-
     function getBook(id, cb){
       var url = 'https://bcd-library.firebaseio.com/books/' + id +'.json';
 
@@ -51,7 +41,6 @@
     }
 
     return {
-      listBookDetails: listBookDetails,
       getBook: getBook
     }
   })
