@@ -38,17 +38,30 @@
       })
     }
 
+    function getBook(id, cb){
+      var url = 'https://bcd-library.firebaseio.com/books/' + id +'.json';
+
+      $http.get(url)
+      .success(function(data){
+        cb(data);
+      })
+      .error(function(err){
+        console.log(err);
+      })
+    }
+
     return {
-      listBookDetails: listBookDetails
+      listBookDetails: listBookDetails,
+      getBook: getBook
     }
   })
   .controller('detailsController',function($http, $routeParams, libFactory){
     var vm = this;
     var bookId = $routeParams.bookId;
-    libFactory.listBookDetails(bookId,function(data){
+    libFactory.getBook(bookId,function(data){
       vm.book = data;
       vm.coverImageUrl = _coverImageUrl();
-    })
+    });
 
     function _coverImageUrl() {
       var isbn = vm.book.ISBN;
@@ -56,16 +69,13 @@
       return url;
     }
   })
-  .controller('editBookController',function($http, $routeParams, $location){
+  .controller('editBookController',function($http, $routeParams, $location, libFactory){
     var vm = this;
     var id = $routeParams.bookId;
     var url = 'https://bcd-library.firebaseio.com/books/' + id + '.json';
-    $http.get(url)
-      .success(function(data){
+
+    libFactory.getBook(id, function(data){
         vm.newBook = data;
-    })
-    .error(function(err){
-      console.log('edit book error: ' + err);
     });
 
     vm.addNewBook = function(){
