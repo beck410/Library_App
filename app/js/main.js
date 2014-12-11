@@ -26,7 +26,7 @@
     })
     .otherwise({redirectTo: '/'});
   })
-  .factory('libFactory', function($http){
+  .factory('libFactory', function($http, $location){
 
     function getBook(id, cb){
       var url = 'https://bcd-library.firebaseio.com/books/' + id +'.json';
@@ -40,8 +40,20 @@
       })
     }
 
+    function editBook(id, todo){
+      var url = 'https://bcd-library.firebaseio.com/books/' + id +'.json';
+      $http.put(url,vm.newBook)
+      .success(function(data){
+        $location.path('/');
+      })
+      .error(function(err){
+        console.log('edit book error:' + err);
+      });
+    }
+
     return {
-      getBook: getBook
+      getBook: getBook,
+      editBook: editBook
     }
   })
   .controller('detailsController',function($http, $routeParams, libFactory){
@@ -67,15 +79,7 @@
         vm.newBook = data;
     });
 
-    vm.addNewBook = function(){
-      $http.put(url,vm.newBook)
-      .success(function(data){
-        $location.path('/');
-      })
-      .error(function(err){
-        console.log('edit book error:' + err);
-      });
-    };
+    libFactory.editBook(id,vm.newBook);
 
     vm.rating = {
       one: 1,
