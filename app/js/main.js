@@ -82,13 +82,27 @@
       })
     }
 
+    var ratingOptions = {
+      one: 1,
+      two: 2,
+      three: 3,
+      four: 4,
+      five: 5
+    };
+
+    var categoryOptions = {
+      fiction: 'Fiction',
+      nonFiction: 'Non-Fiction'
+    };
+
     return {
       getAllBooks: getAllBooks,
       getBook: getBook,
       editBook: editBook,
       createNewBook: createNewBook,
-      deleteBook: deleteBook
-
+      deleteBook: deleteBook,
+      rating: ratingOptions,
+      category: categoryOptions
     }
   })
   .controller('detailsController',function($http, $routeParams, libFactory){
@@ -149,27 +163,6 @@
       })
     }
 
-    function _defaultBook(){
-      return {
-        rating: 3,
-        read: false
-      };
-    }
-
-    //public vars
-    vm.newBook = _defaultBook();
-    vm.rating = {
-      one: 1,
-      two: 2,
-      three: 3,
-      four: 4,
-      five: 5
-    };
-    vm.category = {
-      fiction: 'Fiction',
-      nonFiction: 'Non-Fiction'
-    };
-
     vm.updateRead = function(bookId, readValue,book){
       book.read = readValue;
       var url = 'https://bcd-library.firebaseio.com/books/' + bookId + '.json';
@@ -181,8 +174,22 @@
       });
     };
 
+    vm.rating = libFactory.rating;
+
+    vm.category = libFactory.category;
+
+    vm.newBook = _defaultBook();
+
     vm.addStars = function(rating){
       return rating;
     };
+
+    function _defaultBook(){
+      return {
+        rating: 3,
+        read: false
+      };
+    }
+
   });
 })();
