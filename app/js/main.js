@@ -37,7 +37,7 @@
       })
       .error(function(err){
         console.log(err);
-      })
+      });
     }
 
     function editBook(id, newBook){
@@ -58,13 +58,13 @@
       })
       .error(function(err){
         console.log(err);
-      })
+      });
     }
 
     function createNewBook(newBook, cb){
       $http.post('https://bcd-library.firebaseio.com/books.json',newBook)
       .success(function(data){
-        cb(data)
+        cb(data);
       })
       .error(function(err){
         console.log('add Book error:' + err);
@@ -79,7 +79,7 @@
       })
       .error(function(err){
         console.log('delete book error: ' + err);
-      })
+      });
     }
 
     var ratingOptions = {
@@ -100,7 +100,7 @@
         rating: 3,
         read: false
       };
-    }
+    };
 
     return {
       getAllBooks: getAllBooks,
@@ -111,7 +111,7 @@
       rating: ratingOptions,
       category: categoryOptions,
       defaultBook: defaultBook
-    }
+    };
   })
   .controller('detailsController',function($http, $routeParams, libFactory){
     var vm = this;
@@ -130,7 +130,6 @@
   .controller('editBookController',function($routeParams, libFactory){
     var vm = this;
     var id = $routeParams.bookId;
-    var url = 'https://bcd-library.firebaseio.com/books/' + id + '.json';
 
     libFactory.getBook(id, function(data){
         vm.newBook = data;
@@ -155,21 +154,21 @@
 
     libFactory.getAllBooks(function(data){
       vm.books = data;
-    })
+    });
 
     vm.addNewBook = function(){
       libFactory.createNewBook(vm.newBook, function(data){
         vm.books[data.name] = vm.newBook;
         libFactory.defaultBook();
         $location.path('/');
-      })
+      });
     };
 
     vm.removeBook = function(bookId){
       libFactory.deleteBook(bookId,function(){
         delete vm.books[bookId];
-      })
-    }
+      });
+    };
 
     vm.updateRead = function(bookId, readValue,book){
       book.read = readValue;
