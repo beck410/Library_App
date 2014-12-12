@@ -2,7 +2,22 @@
   'use strict';
   angular.module('Library')
     .controller('LoginController',function(){
+      var vm = this;
 
+      vm.loginUser = function(){
+        var ref = new Firebase('https://bcd-library.firebaseio.com/');
+
+        ref.authWithPassword({
+          email: vm.email,
+          password: vm.password
+        }, function(error, authData){
+            if(error === null){
+              console.log("user logged in successfully", authData);
+            } else {
+              console.log("Error creating user:", error);
+            }
+        })
+      }
     })
     .controller('detailsController',function($routeParams, libFactory){
       var vm = this;

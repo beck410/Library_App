@@ -1,5 +1,5 @@
 <h1>Library Login</h1>
-<form name="loginForm" novalidate>
+<form name="loginForm" ng-submit="login.loginUser()" novalidate>
   <div class="form-group" ng-class="{'has-error': loginForm.$dirty && !login.email}">
     <label for="loginEmail">Email: </label>
     <input class="form-control" id="loginEmail" type="email" ng-model="login.email"/ required>
