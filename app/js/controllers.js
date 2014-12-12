@@ -50,6 +50,14 @@
         })
       }
     })
+    .controller('LogoutController',function($location, $scope){
+      var ref = new Firebase('https://bcd-library.firebaseio.com/');
+        ref.unauth(function(){
+          console.log('logout works')
+          $location.path('/');
+          $scope.$apply();
+        });
+    })
     .controller('detailsController',function($routeParams, libFactory){
       var vm = this;
       var bookId = $routeParams.bookId;

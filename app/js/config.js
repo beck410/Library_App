@@ -11,6 +11,10 @@
         controller: 'LoginController',
         controllerAs: 'login'
       })
+      .when('/logout',{
+        template: '',
+        controller: 'LogoutController',
+      })
       .when('/books',{
         templateUrl: 'views/table.html',
         controller: 'LibraryController',
