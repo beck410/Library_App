@@ -4,21 +4,24 @@
     .config(function($routeProvider){
       $routeProvider
       .when('/',{
+        templateUrl: 'views/landing.html'
+      })
+      .when('/books/',{
         templateUrl: 'views/table.html',
         controller: 'LibraryController',
         controllerAs: 'lib'
       })
-      .when('/new',{
+      .when('/books/new',{
         templateUrl: 'views/form.html',
         controller: 'LibraryController',
         controllerAs: 'lib'
       })
-      .when('/:bookId',{
+      .when('/books/:bookId',{
         templateUrl: 'views/details.html',
         controller: 'detailsController',
         controllerAs: 'details'
       })
-      .when('/:bookId/edit',{
+      .when('/books/:bookId/edit',{
         templateUrl: 'views/form.html',
         controller: 'editBookController',
         controllerAs: 'lib'
