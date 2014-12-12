@@ -127,6 +127,7 @@
           destPrefix: 'app/dist/'
           },
         files: {
+          'js/firebase/firebase.js': 'firebase/firebase.js',
           'js/jquery/jquery.min.js': 'jquery/dist/jquery.js',
           'js/angular/angular.js': 'angular/angular.js',
           'js/angular-route/angular-route.min.js': 'angular-route/angular-route.min.js',
