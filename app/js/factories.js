@@ -1,10 +1,11 @@
 ;(function(){
   'use strict';
   angular.module('Library')
-    .factory('libFactory', function($http, $location){
+  .constant('FIREBASE_URL','https://bcd-library.firebaseio.com/')
+    .factory('libFactory', function($http, $location, FIREBASE_URL){
 
       function getBook(id, cb){
-        var url = 'https://bcd-library.firebaseio.com/books/' + id +'.json';
+        var url = FIREBASE_URL + 'books/' + id +'.json';
 
         $http.get(url)
         .success(function(data){
@@ -16,7 +17,7 @@
       }
 
       function editBook(id, newBook){
-        var url = 'https://bcd-library.firebaseio.com/books/' + id +'.json';
+        var url = FIREBASE_URL + 'books/' + id +'.json';
         $http.put(url, newBook)
         .success(function(data){
           $location.path('/');
@@ -27,7 +28,7 @@
       }
 
       function getAllBooks(cb){
-        $http.get('https://bcd-library.firebaseio.com/books.json')
+        $http.get(FIREBASE_URL + 'books.json')
         .success(function(data){
           cb(data);
         })
@@ -37,7 +38,7 @@
       }
 
       function createNewBook(newBook, cb){
-        $http.post('https://bcd-library.firebaseio.com/books.json',newBook)
+        $http.post(FIREBASE_URL + 'books.json',newBook)
         .success(function(data){
           cb(data);
         })
@@ -47,7 +48,7 @@
       }
 
       function deleteBook(bookId, cb){
-        var url = 'https://bcd-library.firebaseio.com/books/' + bookId + '.json';
+        var url = FIREBASE_URL + 'books/' + bookId + '.json';
         $http.delete(url)
         .success(function(){
           cb();
