@@ -12,14 +12,14 @@
           password: vm.password
         }, function(error, authData){
             if(error === null){
-              console.log("user logged in successfully", authData);
+              console.log('user logged in successfully', authData);
               $location.path('/');
               $scope.$apply();
             } else {
-              console.log("Error creating user:", error);
+              console.log('Error creating user:', error);
             }
-        })
-      }
+        });
+      };
 
       vm.registerUser = function(){
         var ref = new Firebase('https://bcd-library.firebaseio.com/');
@@ -29,12 +29,12 @@
           password: vm.password
         }, function(error,authData){
           if(error === null){
-            console.log("User created successfully", authData);
+            console.log('User created successfully', authData);
           } else {
-            console.log("Error creating user:", error);
+            console.log('Error creating user: ', error);
           }
-        })
-      }
+        });
+      };
     })
     .controller('detailsController',function($routeParams, libFactory){
       var vm = this;
