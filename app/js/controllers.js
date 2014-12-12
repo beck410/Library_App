@@ -1,62 +1,85 @@
 ;(function(){
   'use strict';
   angular.module('Library')
-    .controller('LoginController',function($scope,$location){
-      var vm = this;
+    .factory('authFactory', function(FIREBASE_URL){
+      var factory = {},
+        ref = new Firebase(FIREBASE_URL);
 
-      vm.loginUser = function(){
-        var ref = new Firebase('https://bcd-library.firebaseio.com/');
-
+      factory.loginUser = function(email,password,cb){
         ref.authWithPassword({
-          email: vm.email,
-          password: vm.password
+          email: email,
+          password: password
         }, function(error, authData){
-            if(error === null){
-              console.log('user logged in successfully', authData);
-              $location.path('/books');
-              $scope.$apply();
-            } else {
-              console.log('Error creating user:', error);
-            }
-        });
-      };
+          if(error === null){
+            console.log('user logged in successfully', authData);
+            cb();
+          } else {
+            console.log('Error creating user:', error);
+          }
+        })
+      }
 
-      vm.registerUser = function(){
-        var ref = new Firebase('https://bcd-library.firebaseio.com/');
-
+      factory.registerUser = function(email,password,cb){
         ref.createUser({
-          email: vm.email,
-          password: vm.password
+          email: email,
+          password: password
         }, function(error,authData){
           if(error === null){
             console.log('User created successfully', authData);
-            vm.loginUser();
+            cb()
           } else {
             console.log('Error creating user: ', error);
           }
         });
-      };
+      }
 
-      vm.forgotPassword = function(){
-        var ref = new Firebase('https://bcd-library.firebaseio.com/');
+      factory.forgotPassword = function(email){
         ref.resetPassword({
-          email : vm.email
+          email : email
         }, function(error) {
           if (error === null) {
             console.log("Password reset email sent successfully");
           } else {
-              console.log("Error sending password reset email:", error);
+            console.log("Error sending password reset email:", error);
           }
         })
       }
-    })
-    .controller('LogoutController',function($location, $scope){
-      var ref = new Firebase('https://bcd-library.firebaseio.com/');
+
+      factory.logout = function(cb){
         ref.unauth(function(){
           console.log('logout works')
+          cb();
+        });
+      }
+
+      return factory;
+    })
+    .controller('LoginController',function(authFactory,$scope,$location){
+      var vm = this;
+
+      vm.loginUser = function(){
+        authFactory.loginUser(vm.email, vm.password, function(){
+          $location.path('/books');
+          $scope.$apply();
+        })
+      };
+
+      vm.registerUser = function(){
+        authFactory.registerUser(vm.email,vm.password, function(){
+          vm.loginUser();
+        })
+      };
+
+      vm.forgotPassword = function(){
+        authFactory.forgotPassword(vm.email);
+      }
+
+    })
+    .controller('LogoutController',function($location, $scope, authFactory){
+        authFactory.logout(function(){
           $location.path('/');
           $scope.$apply();
-        });
+        })
     })
     .controller('detailsController',function($routeParams, libFactory){
       var vm = this;
