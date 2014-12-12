@@ -3,10 +3,16 @@
   angular.module('Library')
     .factory('libFactory', function($http, $location, FIREBASE_URL){
 
-      function getBook(id, cb){
-        var url = FIREBASE_URL + 'books/' + id +'.json';
+      function _libraryUrl(id){
+          if(id){
+            return FIREBASE_URL + 'books/' + id + '.json';
+          } else {
+            return FIREBASE_URL + 'books.json';
+          }
+      }
 
-        $http.get(url)
+      function getBook(id, cb){
+        $http.get(_libraryUrl(id))
         .success(function(data){
           cb(data);
         })
@@ -16,8 +22,7 @@
       }
 
       function editBook(id, newBook){
-        var url = FIREBASE_URL + 'books/' + id +'.json';
-        $http.put(url, newBook)
+        $http.put(_libraryUrl(id), newBook)
         .success(function(data){
           $location.path('/');
         })
@@ -27,7 +32,7 @@
       }
 
       function getAllBooks(cb){
-        $http.get(FIREBASE_URL + 'books.json')
+        $http.get(_libraryUrl())
         .success(function(data){
           cb(data);
         })
@@ -37,7 +42,7 @@
       }
 
       function createNewBook(newBook, cb){
-        $http.post(FIREBASE_URL + 'books.json',newBook)
+        $http.post(_libraryUrl(),newBook)
         .success(function(data){
           cb(data);
         })
@@ -47,8 +52,7 @@
       }
 
       function deleteBook(bookId, cb){
-        var url = FIREBASE_URL + 'books/' + bookId + '.json';
-        $http.delete(url)
+        $http.delete(_libraryUrl(bookId))
         .success(function(){
           cb();
         })
