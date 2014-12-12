@@ -1,7 +1,7 @@
 ;(function(){
   'use strict';
   angular.module('Library')
-    .controller('LoginController',function(){
+    .controller('LoginController',function($scope,$location){
       var vm = this;
 
       vm.loginUser = function(){
@@ -13,6 +13,8 @@
         }, function(error, authData){
             if(error === null){
               console.log("user logged in successfully", authData);
+              $location.path('/');
+              $scope.$apply();
             } else {
               console.log("Error creating user:", error);
             }
