@@ -20,6 +20,21 @@
             }
         })
       }
+
+      vm.registerUser = function(){
+        var ref = new Firebase('https://bcd-library.firebaseio.com/');
+
+        ref.createUser({
+          email: vm.email,
+          password: vm.password
+        }, function(error,authData){
+          if(error === null){
+            console.log("User created successfully", authData);
+          } else {
+            console.log("Error creating user:", error);
+          }
+        })
+      }
     })
     .controller('detailsController',function($routeParams, libFactory){
       var vm = this;
