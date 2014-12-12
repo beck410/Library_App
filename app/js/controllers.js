@@ -13,7 +13,7 @@
         }, function(error, authData){
             if(error === null){
               console.log('user logged in successfully', authData);
-              $location.path('/');
+              $location.path('/books');
               $scope.$apply();
             } else {
               console.log('Error creating user:', error);
