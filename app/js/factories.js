@@ -1,7 +1,6 @@
 ;(function(){
   'use strict';
   angular.module('Library')
-  .constant('FIREBASE_URL','https://bcd-library.firebaseio.com/')
     .factory('libFactory', function($http, $location, FIREBASE_URL){
 
       function getBook(id, cb){
