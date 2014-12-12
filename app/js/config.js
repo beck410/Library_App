@@ -6,7 +6,12 @@
       .when('/',{
         templateUrl: 'views/landing.html'
       })
-      .when('/books/',{
+      .when('/login',{
+        templateUrl: 'views/login.html',
+        controller: 'LoginController',
+        controllerAs: 'login'
+      })
+      .when('/books',{
         templateUrl: 'views/table.html',
         controller: 'LibraryController',
         controllerAs: 'lib'

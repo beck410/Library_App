@@ -1,6 +1,9 @@
 ;(function(){
   'use strict';
   angular.module('Library')
+    .controller('LoginController',function(){
+
+    })
     .controller('detailsController',function($routeParams, libFactory){
       var vm = this;
       var bookId = $routeParams.bookId;
