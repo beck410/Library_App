@@ -12,5 +12,10 @@
       template: '',
       controller: 'LogoutController',
     })
+    .when('/changepassword',{
+      templateUrl: 'views/changepassword.html',
+      controller: 'ChangePasswordController',
+      controllerAs: 'changepw'
+    })
   })
 })();

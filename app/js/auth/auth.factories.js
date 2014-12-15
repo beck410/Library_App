@@ -52,6 +52,21 @@
       });
     }
 
+    factory.changePassword = function(oldPass, newPass, cb){
+      ref.changePassword({
+        email: ref.getAuth().password.email,
+        oldPassword: oldPass,
+        newPassword: newPass
+      }, function(error){
+        if (error === null) {
+          console.log('Password changed successfully');
+          cb();
+        } else {
+          console.log('Error changing password:', error);
+        }
+      })
+    }
+
     return factory;
   })
 })();
