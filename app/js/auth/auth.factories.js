@@ -1,7 +1,7 @@
 ;(function(){
   'use strict';
   angular.module('Library')
-  .factory('authFactory', function(FIREBASE_URL){
+  .factory('authFactory', function(FIREBASE_URL, $location){
     var factory = {},
     ref = new Firebase(FIREBASE_URL);
 
@@ -65,6 +65,24 @@
           console.log('Error changing password:', error);
         }
       })
+    }
+
+    factory.requireLogin = function(){
+      if(!_isLoggedIn()){
+        $location.path('/login');
+      } else if(_hasTemporaryPassword()){
+        $location.path('/changepassword');
+      }
+    }
+
+    function _isLoggedIn(){
+      var ref = new Firebase(FIREBASE_URL);
+      return Boolean(ref.getAuth());
+    }
+
+    function _hasTemporaryPassword(){
+      var ref = new Firebase(FIREBASE_URL);
+      return ref.getAuth().password.isTemporaryPassword;
     }
 
     return factory;
