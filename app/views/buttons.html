@@ -1,7 +1,7 @@
 <div class="page-buttons">
-  <a class="btn btn-primary" href="/#/books">All Books</a>
-  <a class="btn btn-primary" href="/#/books/new">Add New Book</a>
-  <a class="btn btn-primary" href="/#/login">Login</a>
-  <a class="btn btn-danger" href="/#/logout">Logout</a>
-  <a class="btn btn-link" href="/#/changepassword">Change Password...</a>
+  <a class="btn btn-primary" ng-show="user" href="/#/books">All Books</a>
+  <a class="btn btn-primary" ng-show="user" href="/#/books/new">Add New Book</a>
+  <a class="btn btn-primary" ng-hide="user" href="/#/login">Login</a>
+  <a class="btn btn-danger" ng-show="user" href="/#/logout">Logout</a>
+  <a class="btn btn-link" ng-show="user" href="/#/changepassword">Change Password...</a>
 </div>

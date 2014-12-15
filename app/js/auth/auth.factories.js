@@ -1,9 +1,10 @@
 ;(function(){
   'use strict';
   angular.module('Library')
-  .factory('authFactory', function(FIREBASE_URL, $location){
+  .factory('authFactory', function($rootScope, FIREBASE_URL, $location){
     var factory = {},
     ref = new Firebase(FIREBASE_URL);
+    $rootScope.user = ref.getAuth();
 
     factory.loginUser = function(email,password,cb){
       ref.authWithPassword({
@@ -12,6 +13,7 @@
       }, function(error, authData){
         if(error === null){
           console.log('user logged in successfully', authData);
+          $rootScope.user = authData;
           cb();
         } else {
           console.log('Error creating user:', error);
@@ -47,7 +49,8 @@
 
     factory.logout = function(cb){
       ref.unauth(function(){
-        console.log('logout works')
+        console.log('logout works');
+        $rootScope.user = null;
         cb();
       });
     }
